@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лестница Успеха</title>
+<link rel="icon" href="icon.ico">
+<style>
+body{
+    margin:0;
+    font-family: Comic Sans MS, cursive;
+    overflow-x:hidden;
+    background: linear-gradient(135deg,#a8ffdf,#ff4fa3);
+    position:relative;
+}
+
+/* Плавающие круги */
+.circle{
+    position:absolute;
+    border-radius:50%;
+    opacity:0.3;
+    animation: float 10s infinite ease-in-out alternate;
+}
+.circle:nth-child(1){width:200px;height:200px;background:#fff;top:10%;left:5%;}
+.circle:nth-child(2){width:150px;height:150px;background:#fff;bottom:10%;right:10%;animation-duration:12s;}
+.circle:nth-child(3){width:100px;height:100px;background:#fff;top:60%;left:40%;animation-duration:8s;}
+
+@keyframes float{
+    from{transform:translateY(0px);}
+    to{transform:translateY(40px);}
+}
+
+/* Мерцающие звезды */
+.star{
+    position:absolute;
+    color:white;
+    animation: twinkle 2s infinite alternate;
+}
+.star:nth-child(4){top:20%;left:70%;}
+.star:nth-child(5){top:50%;left:20%;}
+.star:nth-child(6){top:75%;left:80%;}
+@keyframes twinkle{
+    from{opacity:0.2;transform:scale(0.8);}
+    to{opacity:1;transform:scale(1.2);}
+}
+
+/* Заголовок */
+h1{
+    text-align:center;
+    font-size:50px;
+    margin-top:30px;
+    color:white;
+    text-shadow:3px 3px 8px #000;
+    animation: pulse 3s infinite;
+}
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+.container{
+    position:relative;
+    width:100%;
+    max-width:1200px;
+    margin:100px auto;
+    height:700px;
+}
+
+/* Ступеньки */
+.step{
+    position:absolute;
+    width:300px;
+    height:130px;
+    border-radius:20px;
+    border:5px solid white;
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:50px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.step:hover{
+    transform:scale(1.05);
+}
+
+/* Расположение по диагонали */
+.step1{bottom:0;left:5%;background:linear-gradient(45deg,#ff4b6e,#ff8fa3);}
+.step2{bottom:180px;left:35%;background:linear-gradient(45deg,#ffd54f,#ff9800);}
+.step3{bottom:360px;left:65%;background:linear-gradient(45deg,#4caf50,#81c784);}
+
+/* Соединительные линии */
+.lineH, .lineV{
+    position:absolute;
+    background:white;
+}
+.lineH{height:8px;}
+.lineV{width:8px;}
+
+.line1H{bottom:125px;left:20%;width:15%;}
+.line1V{bottom:125px;left:35%;height:180px;}
+.line2H{bottom:305px;left:50%;width:15%;}
+.line2V{bottom:305px;left:65%;height:180px;}
+
+/* Счётчик */
+.counter{
+    position:absolute;
+    top:-25px;
+    left:-25px;
+    width:50px;
+    height:50px;
+    background:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    box-shadow:0 5px 10px rgba(0,0,0,0.3);
+    z-index:5;
+}
+
+/* Описание */
+.desc{
+    position:absolute;
+    width:300px;
+    padding:10px;
+    border-radius:15px;
+    text-align:center;
+    background:white;
+    font-size:14px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+.desc1{bottom:-120px;left:5%;border:3px solid #ff4b6e;}
+.desc2{bottom:60px;left:35%;border:3px solid #ff9800;}
+.desc3{bottom:240px;left:65%;border:3px solid #4caf50;}
+
+.footer{
+    text-align:center;
+    font-size:20px;
+    color:white;
+    margin-bottom:40px;
+}
+
+/* Анимация смайлика */
+.emoji{
+    animation: pop 0.6s ease;
+}
+@keyframes pop{
+    0%{transform:scale(0) rotate(0deg);}
+    100%{transform:scale(1) rotate(360deg);}
+}
+
+/* Конфетти */
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:0;
+    animation: fall 3s linear forwards;
+}
+@keyframes fall{
+    to{transform:translateY(100vh) rotate(720deg);opacity:0;}
+}
+
+/* Адаптив */
+@media(max-width:768px){
+    .container{height:900px;}
+    .step{width:250px;height:110px;}
+    .desc{width:250px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<div class="star">✨</div>
+<div class="star">⭐</div>
+<div class="star">✨</div>
+
+<h1>ЛЕСТНИЦА УСПЕХА</h1>
+
+<div class="container">
+
+<div class="lineH line1H"></div>
+<div class="lineV line1V"></div>
+<div class="lineH line2H"></div>
+<div class="lineV line2V"></div>
+
+<div class="step step1" onclick="vote(1)">
+<div class="counter" id="count1">0</div>
+</div>
+
+<div class="step step2" onclick="vote(2)">
+<div class="counter" id="count2">0</div>
+</div>
+
+<div class="step step3" onclick="vote(3)">
+<div class="counter" id="count3">0</div>
+</div>
+
+<div class="desc desc1">Всё было непонятно. У меня ничего не получилось</div>
+<div class="desc desc2">Было сложно, но я справился</div>
+<div class="desc desc3">Мне всё понравилось и я справился на отлично.</div>
+
+</div>
+
+<div class="footer">Нажми на ступеньку, которая тебе подходит!</div>
+
+<script>
+let counters = {1:0,2:0,3:0};
+
+const emojis = {
+1:["☹️","🙁","🫤","😓","😔"],
+2:["😑","😐","🤔","😶"],
+3:["☺️","🤗","😄","🤩","😇","😍"]
+};
+
+function vote(step){
+    counters[step]++;
+    document.getElementById("count"+step).innerText = counters[step];
+
+    let stepDiv = document.querySelector(".step"+step);
+    let emoji = emojis[step][Math.floor(Math.random()*emojis[step].length)];
+
+    stepDiv.innerHTML = `<div class="counter" id="count${step}">${counters[step]}</div><div class="emoji">${emoji}</div>`;
+
+    if(step==3){
+        confettiEffect();
+    }
+}
+
+function confettiEffect(){
+    for(let i=0;i<50;i++){
+        let conf = document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.left = Math.random()*100+"vw";
+        conf.style.background = "hsl("+Math.random()*360+",100%,50%)";
+        conf.style.animationDuration = (2+Math.random()*2)+"s";
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(),3000);
+    }
+}
+</script>
+
+</body>
+</html>
